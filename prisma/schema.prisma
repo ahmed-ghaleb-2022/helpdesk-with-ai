@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  name     String
+  email    String     @unique
+  role     String
+  problems Problems[] // One-to-many relation
+  sections Section[]  // One-to-many relation with Section
+}
+
+model Problems {
+  id             Int    @id @default(autoincrement())
+  problem        String
+  solution       String
+  estimateTime   String
+  classification String
+  Status String @default("Pending")
+  userEmail      String   // Foreign key using email
+  user           User     @relation(fields: [userEmail], references: [email], onDelete: Cascade, onUpdate: Cascade) // Relation using email
+}
+
+model Section {
+  id        Int      @id @default(autoincrement())
+  name      String
+  userEmail String   // Foreign key to User model using email
+  user      User     @relation(fields: [userEmail], references: [email], onDelete: Cascade, onUpdate: Cascade) // Relation using email
+}
