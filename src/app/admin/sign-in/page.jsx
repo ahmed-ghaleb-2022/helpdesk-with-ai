@@ -32,7 +32,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-around h-screen">
+    <div className="flex flex-col items-center gap-36 pt-40 h-screen">
       <h2 className="text-3xl text-center text-white">Staff Login page</h2>
       <div className="flex flex-col items-center justify-center">
 

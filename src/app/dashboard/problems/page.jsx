@@ -2,8 +2,6 @@
 import { useEffect, useState } from "react";
 import DashboardLayout from "../DashboardLayout";
 import {
-  getAllProblems,
-  getProblemsForClassification,
   getUserRole,
   getUserSections,
   updateProblemStatus,
@@ -17,8 +15,8 @@ const Problems = () => {
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState("");
   const [selectedClassification, setClassification] = useState("");
- 
-  const { currentUser } = useUserContext();
+
+  const { currentUser, allProblems } = useUserContext();
 
   const handleEdit = (problem) => {
     setSelectedProblem(problem);
@@ -43,15 +41,19 @@ const Problems = () => {
       console.log(role);
       if (role === "staff") {
         const userSection = await getUserSections(currentUser.email);
-        const problems = await getProblemsForClassification(userSection);
-        setProblems(problems);
+        const sectionProblem = allProblems.filter((problem) => {
+          return problem.classification === userSection;
+        });
+        setProblems(sectionProblem);
+        //const problems = await getProblemsForClassification(userSection);
+        //setProblems(problems);
       } else if (role === "admin") {
-        const problems = await getAllProblems();
-        setProblems(problems);
+        //const problems = await getAllProblems();
+        setProblems(allProblems);
       }
     };
     fetchProblems();
-  }, []);
+  }, [currentUser]);
 
   return (
     <DashboardLayout>

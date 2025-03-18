@@ -2,10 +2,11 @@
 import { getAllStaff, setUserSection } from "@/app/db/dbActions";
 import DashboardLayout from "../DashboardLayout";
 import { useEffect, useState } from "react";
+import { useUserContext } from "@/app/context/UserContext";
 
 const Staff = () => {
   const [staff, setStaff] = useState([]);
-
+ const { currentUser } = useUserContext();
   const [selectedStaff, setSelectedStaff] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedSection, setSelectedSection] = useState("");
@@ -28,7 +29,7 @@ const Staff = () => {
       console.log(staff);
     };
     fetchStaff();
-  }, []);
+  }, [currentUser]);
 
   return (
     <DashboardLayout>

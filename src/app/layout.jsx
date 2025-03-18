@@ -23,16 +23,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head>
-          
-         
-          <link rel="icon" href="/chatbot.png" type="image/png" />
-        </Head>
+        <link rel="icon" href="/chatbot.png" type="image/png" />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <UserProvider>
           <Navbar />
-            {children}
+          {children}
         </UserProvider>
       </body>
     </html>

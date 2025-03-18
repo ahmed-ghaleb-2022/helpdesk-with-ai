@@ -42,7 +42,7 @@ const Narbar = () => {
         </Link>
       </div>
       <div>
-        <Link href="/our-services" className="text-2xl font-semibold text-gray-600">
+        <Link href="/our-services" className="text-2xl font-semibold text-gray-600 grow">
           Our Services
         </Link>
       </div>
@@ -73,7 +73,7 @@ const Narbar = () => {
             )}
           </div>
         ) : (
-          <Link href="/sign-in">Sign In</Link>
+          <Link href="/sign-in" className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded">Sign In</Link>
         )}
       </div>
     </nav>
